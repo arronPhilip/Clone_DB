@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Actors & Director — Avengers: Endgame — PictoPlex</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .tabs-wrapper { background: #fff; }
+  .tab-body { padding: 28px 32px; background: var(--cream); }
+
+  .actors-grid { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 12px; }
+  .actor-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 80px;
+    cursor: pointer;
+    transition: transform .2s;
+  }
+  .actor-card:hover { transform: translateY(-3px); }
+  .actor-card:hover .person-circle { border-color: var(--blue); }
+  .actor-name { font-size: 11px; font-weight: 600; color: var(--text); text-align: center; line-height: 1.3; }
+  .actor-char { font-size: 10px; color: var(--muted); text-align: center; font-style: italic; }
+
+  .director-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    transition: border-color .2s, box-shadow .2s;
+    max-width: 480px;
+  }
+  .director-card:hover { border-color: var(--blue); box-shadow: 0 4px 16px rgba(40,120,212,.1); }
+  .dir-info .dir-badge {
+    display: inline-block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    background: var(--navy);
+    color: var(--blue);
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+  .dir-name { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .dir-also { font-size: 12px; color: var(--muted); }
+  .dir-also a { color: var(--blue); font-weight: 500; }
+  .hint { font-size: 12px; color: var(--muted); margin-top: 10px; font-style: italic; }
+
+  @media (max-width: 600px) {
+    .tab-body { padding: 20px 16px; }
+    .actor-card { width: 68px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span class="p1">PICTO</span><span class="p2">PLEX</span></a>
+  <div class="nav-search">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <span>Search movies, actors, directors…</span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link active">Movies</a>
+    <a href="celebrities.html" class="nav-link">Celebrities</a>
+  </div>
+</nav>
+
+<div class="breadcrumb">
+  <a href="index.html">Home</a><span>›</span>
+  <a href="browse.html">Browse</a><span>›</span>
+  <a href="movie-detail.html">Avengers: Endgame</a><span>›</span>
+  Actors & Director
+</div>
+
+<div class="tabs-wrapper">
+  <div class="tabs">
+    <button class="tab active" data-tab="tab-actors">Actors</button>
+    <button class="tab" data-tab="tab-director">Director</button>
+  </div>
+
+  <!-- ACTORS TAB -->
+  <div id="tab-actors" class="tab-content active">
+    <div class="tab-body">
+      <p style="font-size:12px;color:var(--muted);margin-bottom:20px;text-transform:uppercase;letter-spacing:1.5px;font-weight:600">Main actors — top 10 billed</p>
+      <div class="actors-grid">
+        <div class="actor-card" onclick="location.href='celebrity-detail.html'">
+          <div class="person-circle pc1">RD</div>
+          <div class="actor-name">Robert Downey Jr.</div>
+          <div class="actor-char">Iron Man</div>
+        </div>
+        <div class="actor-card" onclick="location.href='celebrity-detail.html'">
+          <div class="person-circle pc2">CE</div>
+          <div class="actor-name">Chris Evans</div>
+          <div class="actor-char">Cap. America</div>
+        </div>
+        <div class="actor-card" onclick="location.href='celebrity-detail.html'">
+          <div class="person-circle pc3">SJ</div>
+          <div class="actor-name">Scarlett Johansson</div>
+          <div class="actor-char">Black Widow</div>
+        </div>
+        <div class="actor-card" onclick="location.href='celebrity-detail.html'">
+          <div class="person-circle pc4">CH</div>
+          <div class="actor-name">Chris Hemsworth</div>
+          <div class="actor-char">Thor</div>
+        </div>
+        <div class="actor-card" onclick="location.href='celebrity-detail.html'">
+          <div class="person-circle pc5">MR</div>
+          <div class="actor-name">Mark Ruffalo</div>
+          <div class="actor-char">Hulk</div>
+        </div>
+        <div class="actor-card" onclick="location.href='celebrity-detail.html'">
+          <div class="person-circle pc6">JR</div>
+          <div class="actor-name">Jeremy Renner</div>
+          <div class="actor-char">Hawkeye</div>
+        </div>
+        <div class="actor-card" onclick="location.href='celebrity-detail.html'">
+          <div class="person-circle pc1">BC</div>
+          <div class="actor-name">Benedict Cumberbatch</div>
+          <div class="actor-char">Dr. Strange</div>
+        </div>
+        <div class="actor-card" onclick="location.href='celebrity-detail.html'">
+          <div class="person-circle pc2">DC</div>
+          <div class="actor-name">Don Cheadle</div>
+          <div class="actor-char">War Machine</div>
+        </div>
+        <div class="actor-card" onclick="location.href='celebrity-detail.html'">
+          <div class="person-circle pc3">KG</div>
+          <div class="actor-name">Karen Gillan</div>
+          <div class="actor-char">Nebula</div>
+        </div>
+        <div class="actor-card" onclick="location.href='celebrity-detail.html'">
+          <div class="person-circle pc4">PB</div>
+          <div class="actor-name">Paul Bettany</div>
+          <div class="actor-char">Vision</div>
+        </div>
+      </div>
+      <p class="hint">Click any actor to view their full filmography →</p>
+    </div>
+  </div>
+
+  <!-- DIRECTOR TAB -->
+  <div id="tab-director" class="tab-content">
+    <div class="tab-body">
+      <p style="font-size:12px;color:var(--muted);margin-bottom:20px;text-transform:uppercase;letter-spacing:1.5px;font-weight:600">Director</p>
+      <div class="director-card" onclick="location.href='celebrity-detail-director.html'">
+        <div class="person-circle lg pc2">AR</div>
+        <div class="dir-info">
+          <div class="dir-badge">Director</div>
+          <div class="dir-name">Anthony & Joe Russo</div>
+          <div class="dir-also">Also directed: <a href="movie-detail.html">Civil War</a> · <a href="movie-detail.html">Infinity War</a> · <a href="movie-detail.html">The Winter Soldier</a></div>
+        </div>
+      </div>
+      <p class="hint">Click the director to view their full filmography →</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html" class="footer-logo"><span class="p1">PICTO</span><span class="p2">PLEX</span></a>
+  <div class="footer-links">
+    <a href="#" class="footer-link">About</a>
+    <a href="browse.html" class="footer-link">Browse</a>
+    <a href="#" class="footer-link">Privacy</a>
+  </div>
+  <div class="footer-copy">© 2024 PictoPlex</div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

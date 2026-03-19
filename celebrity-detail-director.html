@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Christopher Nolan — PictoPlex</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .celeb-hero {
+    background: linear-gradient(120deg, #0a1628, #162038);
+    padding: 36px 32px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+  .celeb-hero-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .5px;
+    margin-bottom: 10px;
+  }
+  .celeb-hero-name {
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -.5px;
+    margin-bottom: 10px;
+  }
+  .celeb-hero-meta { display: flex; gap: 20px; flex-wrap: wrap; }
+  .celeb-meta-item { font-size: 12px; color: rgba(255,255,255,.45); }
+  .celeb-meta-item strong { color: rgba(255,255,255,.85); font-weight: 600; }
+
+  .celeb-body { padding: 28px 32px; }
+  .sec-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-bottom: 14px;
+    font-weight: 700;
+  }
+  .celeb-bio {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 28px;
+    max-width: 680px;
+  }
+
+  .filmography { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 8px; }
+  .film-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform .2s, border-color .2s, box-shadow .2s;
+  }
+  .film-card:hover { transform: translateY(-4px); border-color: var(--blue); box-shadow: 0 6px 20px rgba(40,120,212,.1); }
+  .film-poster { height: 90px; }
+  .fp1 { background: linear-gradient(160deg, #c8d8f5, #8ab0e8); }
+  .fp2 { background: linear-gradient(160deg, #f5d898, #e0b840); }
+  .fp3 { background: linear-gradient(160deg, #c8f0d8, #70c890); }
+  .fp4 { background: linear-gradient(160deg, #f5c8c8, #e88080); }
+  .film-body { padding: 10px 12px; }
+  .film-title { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .film-meta { font-size: 11px; color: var(--muted); }
+  .film-revenue { font-size: 11px; color: var(--blue); margin-top: 2px; font-weight: 500; }
+
+  @media (max-width: 768px) {
+    .celeb-hero { flex-direction: column; align-items: flex-start; padding: 24px 16px; }
+    .celeb-body { padding: 20px 16px; }
+    .filmography { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span class="p1">PICTO</span><span class="p2">PLEX</span></a>
+  <div class="nav-search">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <span>Search movies, actors, directors…</span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Movies</a>
+    <a href="celebrities.html" class="nav-link active">Celebrities</a>
+  </div>
+</nav>
+
+<div class="breadcrumb">
+  <a href="index.html">Home</a><span>›</span>
+  <a href="celebrities.html">Celebrities</a><span>›</span>
+  Christopher Nolan
+</div>
+
+<div class="celeb-hero">
+  <div class="person-circle lg pc2">CN</div>
+  <div>
+    <div class="celeb-hero-badge" style="background:var(--gold);color:var(--navy)">Director</div>
+    <div class="celeb-hero-name">Christopher Nolan</div>
+    <div class="celeb-hero-meta">
+      <div class="celeb-meta-item">Born <strong>Jul 30, 1970</strong></div>
+      <div class="celeb-meta-item">Films directed <strong>12</strong></div>
+      <div class="celeb-meta-item">Nationality <strong>British-American</strong></div>
+    </div>
+  </div>
+</div>
+
+<div class="celeb-body">
+  <div class="sec-label">Biography</div>
+  <p class="celeb-bio">Christopher Edward Nolan is a British-American filmmaker. Known for his Hollywood blockbusters with complex storytelling, Nolan is considered one of the most influential filmmakers of his generation. His films have grossed more than $5 billion worldwide. He is known for his distinctive non-linear storytelling and atmospheric visual style, and his work spans genres from psychological thriller to science fiction and historical epic.</p>
+
+  <div class="divider-sm"></div>
+
+  <div class="sec-label">Directed films — 12</div>
+  <div class="filmography">
+    <div class="film-card" onclick="location.href='movie-detail.html'">
+      <div class="film-poster fp1"></div>
+      <div class="film-body"><div class="film-title">Inception</div><div class="film-meta">2010 · Sci-Fi</div><div class="film-revenue">$836M revenue</div></div>
+    </div>
+    <div class="film-card" onclick="location.href='movie-detail.html'">
+      <div class="film-poster fp2"></div>
+      <div class="film-body"><div class="film-title">The Dark Knight</div><div class="film-meta">2008 · Action</div><div class="film-revenue">$1.0B revenue</div></div>
+    </div>
+    <div class="film-card" onclick="location.href='movie-detail.html'">
+      <div class="film-poster fp3"></div>
+      <div class="film-body"><div class="film-title">Interstellar</div><div class="film-meta">2014 · Sci-Fi</div><div class="film-revenue">$701M revenue</div></div>
+    </div>
+    <div class="film-card" onclick="location.href='movie-detail.html'">
+      <div class="film-poster fp4"></div>
+      <div class="film-body"><div class="film-title">Dunkirk</div><div class="film-meta">2017 · War</div><div class="film-revenue">$527M revenue</div></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html" class="footer-logo"><span class="p1">PICTO</span><span class="p2">PLEX</span></a>
+  <div class="footer-links">
+    <a href="#" class="footer-link">About</a>
+    <a href="browse.html" class="footer-link">Browse</a>
+    <a href="#" class="footer-link">Privacy</a>
+  </div>
+  <div class="footer-copy">© 2024 PictoPlex</div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

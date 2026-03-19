@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Celebrities — PictoPlex</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .celeb-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-bottom: 16px; }
+  .celeb-gcard {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform .2s, border-color .2s, box-shadow .2s;
+    text-align: center;
+  }
+  .celeb-gcard:hover { transform: translateY(-4px); border-color: var(--blue); box-shadow: 0 8px 20px rgba(40,120,212,.1); }
+  .cg-img { height: 80px; display: flex; align-items: center; justify-content: center; }
+  .cg-init { font-size: 26px; font-weight: 800; color: var(--blue2); }
+  .cg-body { padding: 10px 8px 12px; }
+  .cg-name { font-size: 11px; font-weight: 600; color: var(--text); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cg-tag { display: inline-block; padding: 2px 9px; border-radius: 99px; font-size: 10px; font-weight: 600; margin-bottom: 4px; }
+  .cg-tag.actor   { background: var(--blue3); color: var(--blue2); }
+  .cg-tag.director { background: var(--gold3); color: var(--gold2); }
+  .cg-films { font-size: 10px; color: var(--muted); }
+
+  .pop-chart { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+  .pop-row {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .pop-row:hover { border-color: var(--blue); box-shadow: 0 4px 14px rgba(40,120,212,.1); }
+  .pop-rank { font-family: var(--font-display); font-size: 20px; font-weight: 900; color: var(--blue4); width: 28px; text-align: center; flex-shrink: 0; }
+  .pop-rank.top { color: var(--blue); }
+  .pop-info { flex: 1; }
+  .pop-name { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 6px; }
+  .pop-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .pop-badge { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 99px; }
+  .pop-badge.actor   { background: var(--blue3); color: var(--blue2); }
+  .pop-badge.director { background: var(--gold3); color: var(--gold2); }
+  .pop-films { margin-left: auto; text-align: right; }
+  .pop-films strong { display: block; font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--navy); }
+  .pop-films span { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
+
+  @media (max-width: 900px) { .celeb-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 600px) { .celeb-grid { grid-template-columns: repeat(2, 1fr); } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span class="p1">PICTO</span><span class="p2">PLEX</span></a>
+  <div class="nav-search">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <span>Search movies, actors, directors…</span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Movies</a>
+    <a href="celebrities.html" class="nav-link active">Celebrities</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div>
+    <div class="page-header-eyebrow">Discover</div>
+    <div class="page-header-title">Actors <span>&</span> Directors</div>
+    <div class="page-header-sub">Browse the people behind your favourite films</div>
+  </div>
+  <div class="search-dark">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <span>Search by name…</span>
+  </div>
+</div>
+
+<div class="tabs-wrapper" style="background:#fff">
+  <div class="tabs">
+    <button class="tab active" data-tab="tab-all">All</button>
+    <button class="tab" data-tab="tab-actors">Actors</button>
+    <button class="tab" data-tab="tab-directors">Directors</button>
+  </div>
+</div>
+
+<div style="background:var(--cream2);border-bottom:1px solid var(--border);padding:10px 32px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+  <select class="sort-select">
+    <option>Sort: Most popular</option>
+    <option>Sort: Name A–Z</option>
+    <option>Sort: Most films</option>
+  </select>
+  <select class="sort-select">
+    <option>Genre: All</option>
+    <option>Genre: Action</option>
+    <option>Genre: Drama</option>
+    <option>Genre: Sci-Fi</option>
+    <option>Genre: Comedy</option>
+  </select>
+</div>
+
+<div class="container">
+
+  <div id="tab-all" class="tab-content active">
+
+    <section class="reveal">
+      <div class="section-hdr">
+        <h2 class="section-title">Popular <span>actors</span></h2>
+        <a href="#" class="section-link">See all →</a>
+      </div>
+      <div class="celeb-grid">
+        <div class="celeb-gcard celeb-gcard" onclick="location.href='celebrity-detail.html'"><div class="cg-img" style="background:linear-gradient(135deg,var(--gold3),#ffe0a0)"><div class="cg-init">RD</div></div><div class="cg-body"><div class="cg-name">Robert Downey Jr.</div><span class="cg-tag actor">Actor</span><div class="cg-films">53 films</div></div></div>
+        <div class="celeb-gcard" onclick="location.href='celebrity-detail.html'"><div class="cg-img" style="background:linear-gradient(135deg,var(--blue3),#c8d8f5)"><div class="cg-init">CE</div></div><div class="cg-body"><div class="cg-name">Chris Evans</div><span class="cg-tag actor">Actor</span><div class="cg-films">38 films</div></div></div>
+        <div class="celeb-gcard" onclick="location.href='celebrity-detail.html'"><div class="cg-img" style="background:linear-gradient(135deg,#ffe8e8,#f5c8c8)"><div class="cg-init">SJ</div></div><div class="cg-body"><div class="cg-name">Scarlett Johansson</div><span class="cg-tag actor">Actor</span><div class="cg-films">44 films</div></div></div>
+        <div class="celeb-gcard" onclick="location.href='celebrity-detail.html'"><div class="cg-img" style="background:linear-gradient(135deg,#e8f5e8,#c8e8c8)"><div class="cg-init">LD</div></div><div class="cg-body"><div class="cg-name">Leonardo DiCaprio</div><span class="cg-tag actor">Actor</span><div class="cg-films">31 films</div></div></div>
+        <div class="celeb-gcard" onclick="location.href='celebrity-detail.html'"><div class="cg-img" style="background:linear-gradient(135deg,#f0e8ff,#e0c8f5)"><div class="cg-init">MF</div></div><div class="cg-body"><div class="cg-name">Morgan Freeman</div><span class="cg-tag actor">Actor</span><div class="cg-films">62 films</div></div></div>
+        <div class="celeb-gcard" onclick="location.href='celebrity-detail.html'"><div class="cg-img" style="background:linear-gradient(135deg,var(--gold3),#ffd880)"><div class="cg-init">TH</div></div><div class="cg-body"><div class="cg-name">Tom Hanks</div><span class="cg-tag actor">Actor</span><div class="cg-films">49 films</div></div></div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="reveal">
+      <div class="section-hdr">
+        <h2 class="section-title">Popular <span>directors</span></h2>
+        <a href="#" class="section-link">See all →</a>
+      </div>
+      <div class="celeb-grid">
+        <div class="celeb-gcard" onclick="location.href='celebrity-detail-director.html'"><div class="cg-img" style="background:linear-gradient(135deg,var(--blue3),#c8d8f5)"><div class="cg-init">CN</div></div><div class="cg-body"><div class="cg-name">Christopher Nolan</div><span class="cg-tag director">Director</span><div class="cg-films">12 films</div></div></div>
+        <div class="celeb-gcard" onclick="location.href='celebrity-detail-director.html'"><div class="cg-img" style="background:linear-gradient(135deg,var(--gold3),#ffe0a0)"><div class="cg-init">SS</div></div><div class="cg-body"><div class="cg-name">Steven Spielberg</div><span class="cg-tag director">Director</span><div class="cg-films">34 films</div></div></div>
+        <div class="celeb-gcard" onclick="location.href='celebrity-detail-director.html'"><div class="cg-img" style="background:linear-gradient(135deg,#ffe8e8,#f5c8c8)"><div class="cg-init">QT</div></div><div class="cg-body"><div class="cg-name">Quentin Tarantino</div><span class="cg-tag director">Director</span><div class="cg-films">10 films</div></div></div>
+        <div class="celeb-gcard" onclick="location.href='celebrity-detail-director.html'"><div class="cg-img" style="background:linear-gradient(135deg,#e8f5e8,#c8e8c8)"><div class="cg-init">MS</div></div><div class="cg-body"><div class="cg-name">Martin Scorsese</div><span class="cg-tag director">Director</span><div class="cg-films">26 films</div></div></div>
+        <div class="celeb-gcard" onclick="location.href='celebrity-detail-director.html'"><div class="cg-img" style="background:linear-gradient(135deg,#f0e8ff,#e0c8f5)"><div class="cg-init">DV</div></div><div class="cg-body"><div class="cg-name">Denis Villeneuve</div><span class="cg-tag director">Director</span><div class="cg-films">11 films</div></div></div>
+        <div class="celeb-gcard" onclick="location.href='celebrity-detail-director.html'"><div class="cg-img" style="background:linear-gradient(135deg,#e8fff5,#c8f0e0)"><div class="cg-init">BJ</div></div><div class="cg-body"><div class="cg-name">Bong Joon-ho</div><span class="cg-tag director">Director</span><div class="cg-films">8 films</div></div></div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="reveal">
+      <div class="section-hdr"><h2 class="section-title">Most <span>popular this week</span></h2></div>
+      <div class="pop-chart">
+        <div class="pop-row" onclick="location.href='celebrity-detail.html'"><div class="pop-rank top">1</div><div class="person-circle pc1" style="width:44px;height:44px;font-size:14px">RD</div><div class="pop-info"><div class="pop-name">Robert Downey Jr. <span class="pop-badge actor">Actor</span></div><div class="pop-sub">Avengers, Iron Man, Sherlock Holmes</div></div><div class="pop-films"><strong>53</strong><span>Films</span></div></div>
+        <div class="pop-row" onclick="location.href='celebrity-detail-director.html'"><div class="pop-rank top">2</div><div class="person-circle pc2" style="width:44px;height:44px;font-size:14px">CN</div><div class="pop-info"><div class="pop-name">Christopher Nolan <span class="pop-badge director">Director</span></div><div class="pop-sub">Inception, The Dark Knight, Interstellar</div></div><div class="pop-films"><strong>12</strong><span>Films</span></div></div>
+        <div class="pop-row" onclick="location.href='celebrity-detail.html'"><div class="pop-rank top">3</div><div class="person-circle pc3" style="width:44px;height:44px;font-size:14px">SJ</div><div class="pop-info"><div class="pop-name">Scarlett Johansson <span class="pop-badge actor">Actor</span></div><div class="pop-sub">Avengers, Lost in Translation, Her</div></div><div class="pop-films"><strong>44</strong><span>Films</span></div></div>
+        <div class="pop-row" onclick="location.href='celebrity-detail.html'"><div class="pop-rank">4</div><div class="person-circle pc4" style="width:44px;height:44px;font-size:14px">LD</div><div class="pop-info"><div class="pop-name">Leonardo DiCaprio <span class="pop-badge actor">Actor</span></div><div class="pop-sub">Inception, Titanic, The Revenant</div></div><div class="pop-films"><strong>31</strong><span>Films</span></div></div>
+        <div class="pop-row" onclick="location.href='celebrity-detail-director.html'"><div class="pop-rank">5</div><div class="person-circle pc5" style="width:44px;height:44px;font-size:14px">QT</div><div class="pop-info"><div class="pop-name">Quentin Tarantino <span class="pop-badge director">Director</span></div><div class="pop-sub">Pulp Fiction, Kill Bill, Django Unchained</div></div><div class="pop-films"><strong>10</strong><span>Films</span></div></div>
+      </div>
+    </section>
+
+  </div>
+
+</div>
+
+<footer>
+  <a href="index.html" class="footer-logo"><span class="p1">PICTO</span><span class="p2">PLEX</span></a>
+  <div class="footer-links">
+    <a href="#" class="footer-link">About</a>
+    <a href="browse.html" class="footer-link">Browse</a>
+    <a href="#" class="footer-link">Privacy</a>
+  </div>
+  <div class="footer-copy">© 2024 PictoPlex</div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
