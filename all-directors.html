@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Directors — PictoPlex</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .directors-header {
+    background: linear-gradient(120deg, #0f1623, #2e3d58);
+    padding: 48px 32px;
+    text-align: center;
+  }
+  
+  .directors-header h1 {
+    font-family: var(--font-display);
+    font-size: 48px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  
+  .directors-header h1 span {
+    color: var(--gold);
+  }
+  
+  .directors-header p {
+    color: rgba(255,255,255,0.6);
+    font-size: 16px;
+  }
+  
+  .directors-stats {
+    background: #fff;
+    padding: 20px 32px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  
+  .total-count {
+    font-size: 14px;
+    color: var(--muted);
+  }
+  
+  .total-count strong {
+    color: var(--gold);
+    font-size: 18px;
+  }
+  
+  .search-director {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .search-director input {
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    width: 250px;
+    font-family: var(--font-body);
+  }
+  
+  .directors-grid-large {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 24px;
+    padding: 32px;
+    background: var(--cream);
+  }
+  
+  .director-card-large {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+  
+  .director-card-large:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold);
+    box-shadow: 0 8px 20px rgba(240,180,41,0.15);
+  }
+  
+  .director-avatar-large {
+    width: 100%;
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, var(--gold3), #ffe8a0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    font-weight: bold;
+    color: var(--gold2);
+  }
+  
+  .director-info-large {
+    padding: 16px;
+  }
+  
+  .director-name-large {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  
+  .director-films {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  
+  @media (max-width: 768px) {
+    .directors-grid-large {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 16px;
+      padding: 20px;
+    }
+    
+    .directors-header h1 {
+      font-size: 32px;
+    }
+    
+    .directors-stats {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .search-director input {
+      width: 100%;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span class="p1">PICTO</span><span class="p2">PLEX</span></a>
+  <div class="nav-search-wrap">
+    <svg class="nav-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="nav-search-input" class="nav-search-input" type="text" placeholder="Search movies, actors, directors…">
+    <div id="nav-search-results" class="nav-search-results"></div>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="browse.html" class="nav-link">Movies</a>
+    <a href="celebrities.html" class="nav-link">Celebrities</a>
+  </div>
+</nav>
+
+<div class="directors-header">
+  <h1>All <span>Directors</span></h1>
+  <p>Discover every director in the PictoPlex database</p>
+</div>
+
+<div class="directors-stats">
+  <div class="total-count">
+    Total <strong id="total-directors">0</strong> directors
+  </div>
+  <div class="search-director">
+    <input type="text" id="director-search" placeholder="Search directors by name...">
+    <button class="btn btn-dark" id="search-btn">Search</button>
+  </div>
+</div>
+
+<div id="directors-grid" class="directors-grid-large">
+  <div class="loading"></div>
+</div>
+
+<div class="pagination-container" style="display: flex; justify-content: center; align-items: center; gap: 20px; padding: 30px 20px;">
+  <button id="first-page" class="btn btn-outline" disabled>« First</button>
+  <button id="prev-page" class="btn btn-outline" disabled>‹ Prev</button>
+  <div id="page-numbers" class="page-numbers"></div>
+  <button id="next-page" class="btn btn-outline">Next ›</button>
+  <button id="last-page" class="btn btn-outline">Last »</button>
+</div>
+
+<footer>
+  <a href="index.html" class="footer-logo"><span class="p1">PICTO</span><span class="p2">PLEX</span></a>
+  <div class="footer-links">
+    <a href="index.html" class="footer-link">Home</a>
+    <a href="browse.html" class="footer-link">Browse</a>
+    <a href="celebrities.html" class="footer-link">Celebrities</a>
+  </div>
+  <div class="footer-copy">© 2024 PictoPlex</div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+let currentPage = 1;
+let totalPages = 1;
+let totalDirectors = 0;
+let currentSearch = '';
+const ITEMS_PER_PAGE = 24;
+
+async function loadDirectors(page = 1) {
+  const grid = document.getElementById('directors-grid');
+  if (!grid) return;
+  grid.innerHTML = '<div class="loading"></div>';
+  
+  currentPage = page;
+  const offset = (page - 1) * ITEMS_PER_PAGE;
+  
+  try {
+    const data = await fetchAPI(`/celebrities?type=director&limit=${ITEMS_PER_PAGE}&offset=${offset}`);
+    const directors = data.directors || [];
+    totalDirectors = directors.length;
+    totalPages = Math.ceil((data.total || directors.length) / ITEMS_PER_PAGE);
+    
+    document.getElementById('total-directors').textContent = totalDirectors.toLocaleString();
+    
+    renderDirectors(grid, directors);
+    updatePagination();
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch (error) {
+    console.error('Error loading directors:', error);
+    grid.innerHTML = '<div class="empty-state"><h3>Error loading directors</h3><p>Please try again later.</p></div>';
+  }
+}
+
+function renderDirectors(container, directors) {
+  if (!directors.length) {
+    container.innerHTML = '<div class="empty-state"><h3>No directors found</h3></div>';
+    return;
+  }
+  
+  const colors = ['pc1', 'pc2', 'pc3', 'pc4', 'pc5', 'pc6'];
+  
+  container.innerHTML = directors.map((director, i) => `
+    <div class="director-card-large" onclick="location.href='celebrity-detail-director.html?id=${director.person_id}'">
+      <div class="director-avatar-large ${colors[i % colors.length]}">
+        ${initials(director.name)}
+      </div>
+      <div class="director-info-large">
+        <div class="director-name-large">${director.name}</div>
+        <div class="director-films">${director.film_count || 0} films</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function updatePagination() {
+  const firstBtn = document.getElementById('first-page');
+  const prevBtn = document.getElementById('prev-page');
+  const nextBtn = document.getElementById('next-page');
+  const lastBtn = document.getElementById('last-page');
+  const pageNumbersDiv = document.getElementById('page-numbers');
+  
+  if (firstBtn) firstBtn.disabled = currentPage === 1;
+  if (prevBtn) prevBtn.disabled = currentPage === 1;
+  if (nextBtn) nextBtn.disabled = currentPage === totalPages;
+  if (lastBtn) lastBtn.disabled = currentPage === totalPages;
+  
+  if (firstBtn) firstBtn.onclick = () => currentPage !== 1 && loadDirectors(1);
+  if (prevBtn) prevBtn.onclick = () => currentPage > 1 && loadDirectors(currentPage - 1);
+  if (nextBtn) nextBtn.onclick = () => currentPage < totalPages && loadDirectors(currentPage + 1);
+  if (lastBtn) lastBtn.onclick = () => currentPage !== totalPages && loadDirectors(totalPages);
+  
+  if (pageNumbersDiv) {
+    const maxVisible = 7;
+    let start = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+    let end = Math.min(totalPages, start + maxVisible - 1);
+    
+    if (end - start + 1 < maxVisible) {
+      start = Math.max(1, end - maxVisible + 1);
+    }
+    
+    let html = '';
+    if (start > 1) {
+      html += `<div class="page-number" data-page="1">1</div>`;
+      if (start > 2) html += `<div class="page-number dots">...</div>`;
+    }
+    
+    for (let i = start; i <= end; i++) {
+      html += `<div class="page-number ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</div>`;
+    }
+    
+    if (end < totalPages) {
+      if (end < totalPages - 1) html += `<div class="page-number dots">...</div>`;
+      html += `<div class="page-number" data-page="${totalPages}">${totalPages}</div>`;
+    }
+    
+    pageNumbersDiv.innerHTML = html;
+    
+    document.querySelectorAll('.page-number[data-page]').forEach(el => {
+      el.addEventListener('click', () => {
+        const page = parseInt(el.dataset.page);
+        if (page !== currentPage) loadDirectors(page);
+      });
+    });
+  }
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+  initNavSearch();
+  setActiveNav();
+  
+  const searchInput = document.getElementById('director-search');
+  const searchBtn = document.getElementById('search-btn');
+  
+  if (searchBtn) {
+    searchBtn.addEventListener('click', () => {
+      currentSearch = searchInput.value.trim();
+      loadDirectors(1);
+    });
+  }
+  
+  if (searchInput) {
+    searchInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        currentSearch = searchInput.value.trim();
+        loadDirectors(1);
+      }
+    });
+  }
+  
+  loadDirectors(1);
+});
+</script>
+</body>
+</html>

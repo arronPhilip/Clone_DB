@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PictoPlex — Your Ultimate Movie Database</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span class="p1">PICTO</span><span class="p2">PLEX</span></a>
+  <div class="nav-search-wrap">
+    <svg class="nav-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="nav-search-input" class="nav-search-input" type="text" placeholder="Search movies, actors, directors…">
+    <div id="nav-search-results" class="nav-search-results"></div>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="browse.html" class="nav-link">Movies</a>
+    <a href="celebrities.html" class="nav-link">Celebrities</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow anim anim-1">Welcome to PictoPlex</div>
+    <h1 class="hero-title anim anim-2">Your ultimate<br><span>movie database</span></h1>
+    <p class="hero-sub anim anim-3">Browse thousands of films. Filter by genre, year, budget and revenue. Discover the actors and directors behind your favourite movies.</p>
+    <div class="hero-ctas anim anim-4">
+      <a href="browse.html" class="btn btn-pri">Browse movies</a>
+      <a href="celebrities.html" class="btn btn-ghost">Celebrities →</a>
+    </div>
+  </div>
+  
+</section>
+
+<div class="container">
+
+  <section class="reveal">
+    <div class="section-hdr">
+      <h2 class="section-title">Trending <span>this week</span></h2>
+      <a href="browse.html" class="section-link">See all →</a>
+    </div>
+    <div class="trending-grid">
+      <!-- Filled by script.js -->
+      <div class="trend-card"><div class="trend-poster tp1"><div class="trend-overlay"></div><div class="trend-rank">#1</div></div><div class="trend-body"><div class="trend-title">Loading…</div></div></div>
+      <div class="trend-card"><div class="trend-poster tp2"><div class="trend-overlay"></div><div class="trend-rank">#2</div></div><div class="trend-body"><div class="trend-title">Loading…</div></div></div>
+      <div class="trend-card"><div class="trend-poster tp3"><div class="trend-overlay"></div><div class="trend-rank">#3</div></div><div class="trend-body"><div class="trend-title">Loading…</div></div></div>
+      <div class="trend-card"><div class="trend-poster tp4"><div class="trend-overlay"></div><div class="trend-rank">#4</div></div><div class="trend-body"><div class="trend-title">Loading…</div></div></div>
+      <div class="trend-card"><div class="trend-poster tp5"><div class="trend-overlay"></div><div class="trend-rank">#5</div></div><div class="trend-body"><div class="trend-title">Loading…</div></div></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  
+
+  <div class="divider"></div>
+
+  <section class="reveal">
+    <div class="section-hdr">
+      <h2 class="section-title">Popular <span>actors</span></h2>
+      <a href="celebrities.html" class="section-link">See all →</a>
+    </div>
+    <div class="people-row"><!-- Filled by script.js --></div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="reveal" style="padding-bottom:48px">
+    <div class="section-hdr">
+      <h2 class="section-title">Popular <span>directors</span></h2>
+      <a href="celebrities.html" class="section-link">See all →</a>
+    </div>
+    <div class="people-row"><!-- Filled by script.js --></div>
+  </section>
+
+</div>
+
+<footer>
+  <a href="index.html" class="footer-logo"><span class="p1">PICTO</span><span class="p2">PLEX</span></a>
+  <div class="footer-links">
+    <a href="index.html" class="footer-link">Home</a>
+    <a href="browse.html" class="footer-link">Browse</a>
+    <a href="celebrities.html" class="footer-link">Celebrities</a>
+  </div>
+  <div class="footer-copy">© 2024 PictoPlex</div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

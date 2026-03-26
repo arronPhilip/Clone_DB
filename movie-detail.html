@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movie — PictoPlex</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .detail-wrap { display: grid; grid-template-columns: 1fr 240px; }
+  @media(max-width:768px) { .detail-wrap { grid-template-columns: 1fr; } .similar-panel { display: none; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span class="p1">PICTO</span><span class="p2">PLEX</span></a>
+  <div class="nav-search-wrap">
+    <svg class="nav-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="nav-search-input" class="nav-search-input" type="text" placeholder="Search movies, actors, directors…">
+    <div id="nav-search-results" class="nav-search-results"></div>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="browse.html" class="nav-link">Movies</a>
+    <a href="celebrities.html" class="nav-link">Celebrities</a>
+  </div>
+</nav>
+
+<div class="breadcrumb">
+  <a href="index.html">Home</a><span class="breadcrumb-sep">›</span>
+  <a href="browse.html">Browse</a><span class="breadcrumb-sep">›</span>
+  <span id="bc-movie">Loading…</span>
+</div>
+
+<!-- PART 1: MOVIE DETAIL -->
+<div class="detail-wrap">
+  <div class="detail-hero">
+    <div id="detail-poster" class="detail-poster dp1">Loading…</div>
+    <div id="detail-badges" class="detail-badges"></div>
+    <h1 id="detail-title" class="detail-title">Loading…</h1>
+    <div id="detail-genres" class="detail-genres"></div>
+    <p id="detail-desc" class="detail-desc"></p>
+    <div class="detail-btns">
+      <a href="#cast" class="btn btn-dark">▶ See cast & director ↓</a>
+    </div>
+  </div>
+  <div id="similar-panel" class="similar-panel">
+    <div class="panel-lbl">More like this</div>
+    <div id="sim-cards" class="sim-cards">
+      <div class="sim-card"><div class="sim-poster sp1"></div><div><div class="sim-t">Loading…</div></div></div>
+      <div class="sim-card"><div class="sim-poster sp2"></div><div><div class="sim-t">Loading…</div></div></div>
+      <div class="sim-card"><div class="sim-poster sp3"></div><div><div class="sim-t">Loading…</div></div></div>
+    </div>
+    <div class="sim-all" onclick="location.href='browse.html'">See all similar →</div>
+  </div>
+</div>
+
+<!-- STATS BAR - ADDED IDs -->
+<div class="stats-bar">
+  <div id="stat-budget" class="stat"><span class="stat-val">—</span><span class="stat-lbl">Budget</span></div>
+  <div id="stat-revenue" class="stat"><span class="stat-val">—</span><span class="stat-lbl">Revenue</span></div>
+  <div id="stat-roi" class="stat"><span class="stat-val">—</span><span class="stat-lbl">ROI</span></div>
+  <div id="stat-runtime" class="stat"><span class="stat-val">—</span><span class="stat-lbl">Runtime</span></div>
+</div>
+
+<!-- PART 2: ACTORS & DIRECTOR -->
+<div class="section-divider" id="cast">
+  <div class="section-divider-title">Actors <span>&</span> Director</div>
+  <div id="movie-title-sub" class="section-divider-sub"></div>
+</div>
+
+<div style="background:#fff">
+  <div class="tabs">
+    <button class="tab active" data-tab="tab-actors">Actors</button>
+    <button class="tab" data-tab="tab-director">Director</button>
+  </div>
+</div>
+
+<div id="tab-actors" class="tab-content active">
+  <div class="tab-body">
+    <span class="sec-label">Main cast — top 10 billed</span>
+    <div id="actors-grid" class="actors-grid">
+      <div class="loading"></div>
+    </div>
+    <span class="hint">Click any actor to view their full filmography →</span>
+  </div>
+</div>
+
+<div id="tab-director" class="tab-content">
+  <div class="tab-body">
+    <span class="sec-label">Director</span>
+    <!-- Changed from <div id="director-wrap"> to <div id="director-wrap" class="director-wrap"> -->
+    <div id="director-wrap" class="director-wrap">
+      <!-- This is the structure the JavaScript expects -->
+      <div id="director-card" class="director-card" style="cursor: pointer;">
+        <div id="dir-avatar" class="person-circle lg pc2">—</div>
+        <div>
+          <div class="dir-badge">Director</div>
+          <div id="dir-name" class="dir-name">Loading…</div>
+          <div id="dir-also" class="dir-also">Click to view full filmography</div>
+        </div>
+      </div>
+    </div>
+    <span class="hint">Click the director to view their full filmography →</span>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html" class="footer-logo"><span class="p1">PICTO</span><span class="p2">PLEX</span></a>
+  <div class="footer-links">
+    <a href="index.html" class="footer-link">Home</a>
+    <a href="browse.html" class="footer-link">Browse</a>
+    <a href="celebrities.html" class="footer-link">Celebrities</a>
+  </div>
+  <div class="footer-copy">© 2024 PictoPlex</div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
