@@ -200,6 +200,30 @@ function skelFilmGrid(n = 4) {
     </div>`).join("");
 }
 
+function skelCelebDetail() {
+  // Hero skeleton
+  const hero = document.querySelector(".celeb-hero");
+  if (hero) {
+    const circle = hero.querySelector(".person-circle");
+   if (circle) circle.style.cssText = "width:126px;height:126px;border-radius:50%;display:inline-block;background:linear-gradient(90deg,#e8dcc8 25%,#f0e4d0 50%,#e8dcc8 75%);background-size:600px 100%;animation:shimmer 1.4s infinite linear;flex-shrink:0;";
+    const badge = hero.querySelector(".celeb-hero-badge");
+    if (badge) badge.innerHTML = `<div class="skel" "></div>`;
+    const name = hero.querySelector(".celeb-hero-name");
+    if (name) name.innerHTML = `<div class="skel" style="height:34px;width:220px;border-radius:6px;"></div>`;
+    const meta = hero.querySelector(".celeb-hero-meta");
+    if (meta) meta.innerHTML = `
+      <div class="skel" style="height:13px;width:120px;border-radius:4px;"></div>
+      <div class="skel" style="height:13px;width:160px;border-radius:4px;"></div>
+      <div class="skel" style="height:13px;width:100px;border-radius:4px;"></div>`;
+  }
+  // Bio skeleton
+  const bio = document.querySelector(".celeb-bio");
+  if (bio) bio.innerHTML = `
+    ${Array.from({length:8}, () => `<div class="skel" style="height:13px;width:${80+Math.floor(Math.random()*20)}%;border-radius:4px;margin-bottom:8px;"></div>`).join("")}`;
+  // Filmography skeleton
+  const grid = document.querySelector(".filmography");
+  if (grid) grid.innerHTML = skelFilmGrid(8);
+}
 
 function skelMovieDetail() {
   // Hero skeleton
@@ -792,27 +816,13 @@ function addWatchlistButton(tmdbId, title) {
 async function loadAllActorsPage() {
   const grid = document.getElementById("actors-grid");
   if (!grid) return;
-  const id = getUrlId();
-  if (!id) return;
+  grid.innerHTML = skelCelebGrid(12);
   try {
-    const m = await apiFetch(`/movies/${id}`);
-    document.title = `All Actors \u2014 ${m.title} \u2014 PictoPlex`;
-
-    const movieLink = document.getElementById("movie-breadcrumb-link");
-    if (movieLink) { movieLink.textContent = m.title; movieLink.href = `movie-detail.html?id=${id}`; }
-
-    const label = document.getElementById("actors-label");
-    if (label) label.textContent = `All Actors \u2014 ${m.title}`;
-
-    const withPhoto = (m.cast || []).filter(c => c.photo);
-    grid.innerHTML = withPhoto.map(c => `
-      <div class="actor-card" onclick="location.href='celebrity-detail.html?id=${c.person_id}'">
-        <img src="${c.photo}" alt="${c.name}" style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid var(--border);">
-        <div class="actor-name">${c.name}</div>
-        <div class="actor-char">${c.character_name || ""}</div>
-      </div>`).join("");
+    const people = await apiFetch("/person/popular");
+    const actors = people.filter(p => p.department === "Acting");
+    grid.innerHTML = actors.map(p => celebCardHTML(p, false)).join("");
   } catch (e) {
-    console.error("Could not load actors:", e);
+    grid.innerHTML = `<div style="color:var(--muted)">Could not load actors.</div>`;
   }
 }
 
@@ -824,30 +834,13 @@ async function loadAllActorsPage() {
 async function loadAllDirectorsPage() {
   const grid = document.getElementById("directors-grid");
   if (!grid) return;
-  const id = getUrlId();
-  if (!id) return;
+  grid.innerHTML = skelCelebGrid(12);
   try {
-    const m = await apiFetch(`/movies/${id}`);
-    document.title = `All Directors \u2014 ${m.title} \u2014 PictoPlex`;
-
-    const movieLink = document.getElementById("movie-breadcrumb-link");
-    if (movieLink) { movieLink.textContent = m.title; movieLink.href = `movie-detail.html?id=${id}`; }
-
-    const label = document.getElementById("directors-label");
-    if (label) label.textContent = `Directors \u2014 ${m.title}`;
-
-    const withPhoto = (m.directors || []).filter(d => d.photo);
-    grid.innerHTML = withPhoto.map(d => `
-      <div class="director-card" onclick="location.href='celebrity-detail-director.html?id=${d.person_id}'">
-        <img src="${d.photo}" alt="${d.name}" style="width:76px;height:76px;border-radius:50%;object-fit:cover;border:3px solid var(--border);">
-        <div class="dir-info">
-          <div class="dir-badge">Director</div>
-          <div class="dir-name">${d.name}</div>
-          <div class="dir-also">Click to view full filmography &rarr;</div>
-        </div>
-      </div>`).join("");
+    const people = await apiFetch("/person/popular");
+    const directors = people.filter(p => p.department === "Directing");
+    grid.innerHTML = directors.map(p => celebCardHTML(p, true)).join("");
   } catch (e) {
-    console.error("Could not load directors:", e);
+    grid.innerHTML = `<div style="color:var(--muted)">Could not load directors.</div>`;
   }
 }
 
@@ -862,6 +855,7 @@ async function loadCelebDetailPage() {
 
   const id = getUrlId();
   if (!id) return;
+   skelCelebDetail();
 
   try {
     const p = await apiFetch(`/person/${id}`);

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PictoPlex</title>
+<title>All Directors &mdash; PictoPlex</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,21 +15,29 @@
     <span>Search movies, actors, directors&hellip;</span>
   </div>
   <div class="nav-links">
-    <a href="index.html" class="nav-link active">Movies</a>
-    <a href="celebrities.html" class="nav-link">Celebrities</a>
+    <a href="index.html" class="nav-link">Movies</a>
+    <a href="celebrities.html" class="nav-link active">Celebrities</a>
   </div>
 </nav>
 
 <div class="breadcrumb">
   <a href="index.html">Home</a><span>&rsaquo;</span>
-  <a href="browse.html">Browse</a><span>&rsaquo;</span>
-  <a href="#" id="movie-breadcrumb-link"></a><span>&rsaquo;</span>
+  <a href="celebrities.html">Celebrities</a><span>&rsaquo;</span>
   All Directors
 </div>
 
-<div class="tab-body">
-  <p class="sec-label" id="directors-label">All Directors</p>
-  <div id="directors-grid"></div>
+<div class="page-header">
+  <div>
+    <div class="page-header-eyebrow">Browse</div>
+    <div class="page-header-title">Popular <span>Directors</span></div>
+    <div class="page-header-sub">The most popular directors right now</div>
+  </div>
+</div>
+
+<div class="container">
+  <section>
+    <div class="celeb-grid" id="directors-grid"></div>
+  </section>
 </div>
 
 <footer>

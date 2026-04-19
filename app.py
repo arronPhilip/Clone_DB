@@ -20,7 +20,7 @@ import hashlib
 import re
 from datetime import datetime
 from functools import wraps
-
+_people_cache = {"data": None, "time": 0}
 app = Flask(__name__)
 app.secret_key = "pictoplex_secret_CHANGE_IN_PRODUCTION"
 CORS(app, supports_credentials=True,
@@ -471,8 +471,18 @@ def discover():
 
 @app.route("/api/person/popular", methods=["GET"])
 def popular_people():
+    import time
+    if _people_cache["data"] and time.time() - _people_cache["time"] < 3600:
+        return jsonify(_people_cache["data"]), 200
     try:
-        actors_data = tmdb("/person/popular", {"page": 1}).get("results", [])
+        from concurrent.futures import ThreadPoolExecutor
+
+        def fetch_actor_page(p):
+            return tmdb("/person/popular", {"page": p}).get("results", [])
+
+        with ThreadPoolExecutor(max_workers=5) as ex:
+            pages = list(ex.map(fetch_actor_page, range(1, 6)))
+        actors_data = [p for page in pages for p in page]
         actors = [{
             "person_id":  p["id"],
             "name":       p["name"],
@@ -481,26 +491,36 @@ def popular_people():
             "known_for":  [m.get("title","") for m in p.get("known_for", [])[:3]],
         } for p in actors_data]
 
-        popular_movies = tmdb("/movie/popular", {"page": 1}).get("results", [])[:5]
+        popular_movies = tmdb("/movie/popular", {"page": 1}).get("results", [])[:10]
         director_ids = set()
         directors = []
-        for movie in popular_movies:
+
+        def fetch_credits(movie):
             try:
                 credits = tmdb(f"/movie/{movie['id']}/credits")
-                for p in credits.get("crew", []):
-                    if p.get("job") == "Director" and p["id"] not in director_ids:
-                        director_ids.add(p["id"])
-                        directors.append({
-                            "person_id":  p["id"],
-                            "name":       p["name"],
-                            "department": "Directing",
-                            "photo":      img(p.get("profile_path")),
-                            "known_for":  [movie.get("title", "")],
-                        })
+                return [(p, movie) for p in credits.get("crew", []) if p.get("job") == "Director"]
             except Exception:
-                continue
+                return []
 
-        return jsonify(actors + directors), 200
+        with ThreadPoolExecutor(max_workers=10) as ex:
+            all_credits = list(ex.map(fetch_credits, popular_movies))
+
+        for crew_list in all_credits:
+            for p, movie in crew_list:
+                if p["id"] not in director_ids:
+                    director_ids.add(p["id"])
+                    directors.append({
+                        "person_id":  p["id"],
+                        "name":       p["name"],
+                        "department": "Directing",
+                        "photo":      img(p.get("profile_path")),
+                        "known_for":  [movie.get("title", "")],
+                    })
+
+        result = actors + directors
+        _people_cache["data"] = result
+        _people_cache["time"] = time.time()
+        return jsonify(result), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -538,7 +558,7 @@ def person_detail(person_id):
         all_films.sort(key=lambda x: x.get("popularity", 0), reverse=True)
         seen, top = set(), []
         for f in all_films:
-            if f["id"] not in seen and len(top) < 8:
+            if f["id"] not in seen:
                 seen.add(f["id"])
                 top.append({
                     "tmdb_id":   f["id"],

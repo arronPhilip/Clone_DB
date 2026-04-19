@@ -409,14 +409,14 @@ section:last-child { padding-bottom: 0; }
 .celeb-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-bottom: 16px; }
 .celeb-gcard { background: #fff; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; cursor: pointer; transition: transform .2s, border-color .2s, box-shadow .2s; text-align: center; }
 .celeb-gcard:hover { transform: translateY(-4px); border-color: var(--blue); box-shadow: 0 8px 20px rgba(40,120,212,.1); }
-.cg-img { height: 80px; display: flex; align-items: center; justify-content: center; }
+.cg-img { height: 260px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .cg-init { font-size: 26px; font-weight: 800; color: var(--blue2); }
 .cg-body { padding: 10px 8px 12px; }
-.cg-name { font-size: 11px; font-weight: 600; color: var(--text); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cg-name { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cg-tag { display: inline-block; padding: 2px 9px; border-radius: 99px; font-size: 10px; font-weight: 600; margin-bottom: 4px; }
 .cg-tag.actor    { background: var(--blue3); color: var(--blue2); }
 .cg-tag.director { background: var(--gold3); color: var(--gold2); }
-.cg-films { font-size: 10px; color: var(--muted); }
+.cg-films { font-size: 13px; color: var(--muted); }
 
 /* POP CHART */
 .pop-chart { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
@@ -446,7 +446,7 @@ section:last-child { padding-bottom: 0; }
 .filmography { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 8px; }
 .film-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; cursor: pointer; transition: transform .2s, border-color .2s, box-shadow .2s; }
 .film-card:hover { transform: translateY(-4px); border-color: var(--blue); box-shadow: 0 6px 20px rgba(40,120,212,.1); }
-.film-poster { height: 90px; }
+.film-poster { height: 720px; }
 .fp1 { background: linear-gradient(160deg, #c8d8f5, #8ab0e8); }
 .fp2 { background: linear-gradient(160deg, #f5d898, #e0b840); }
 .fp3 { background: linear-gradient(160deg, #c8f0d8, #70c890); }
@@ -613,7 +613,7 @@ footer { background: var(--navy); padding: 28px 32px; display: flex; align-items
 .skel-movie-desc { height: 12px; width: 90%; }
 .skel-movie-desc2 { height: 12px; width: 75%; }
 .skel-celeb-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
-.skel-celeb-img { height: 80px; }
+.skel-celeb-img { height: 260px; }
 .skel-celeb-body { padding: 10px 8px 12px; display: flex; flex-direction: column; gap: 6px; align-items: center; }
 .skel-celeb-name { height: 11px; width: 70%; }
 .skel-celeb-tag { height: 18px; width: 50%; border-radius: 99px; }
