@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PictoPlex</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span class="p1">PICTO</span><span class="p2">PLEX</span></a>
+  <div class="nav-search">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <span>Search movies, actors, directors&hellip;</span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link active">Movies</a>
+    <a href="celebrities.html" class="nav-link">Celebrities</a>
+  </div>
+</nav>
+
+<div class="breadcrumb">
+  <a href="index.html">Home</a><span>&rsaquo;</span>
+  <a href="browse.html">Browse</a><span>&rsaquo;</span>
+  <span class="breadcrumb-movie-title"></span>
+</div>
+
+<div class="detail-hero">
+  <div class="detail-bg">
+    <div class="detail-poster dp1"></div>
+    <div class="detail-badges"></div>
+    <h1 class="detail-title"></h1>
+    <div class="detail-genres"></div>
+    <p class="detail-desc"></p>
+    <div class="detail-btns">
+      <a href="#" class="btn btn-dark">&#9654; Watch trailer</a>
+    </div>
+  </div>
+  <div class="similar-panel">
+    <div class="panel-lbl">More like this</div>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat"><span class="stat-val">N/A</span><span class="stat-lbl">Budget</span></div>
+  <div class="stat"><span class="stat-val">N/A</span><span class="stat-lbl">Revenue</span></div>
+  <div class="stat"><span class="stat-val">N/A</span><span class="stat-lbl">ROI</span></div>
+  <div class="stat"><span class="stat-val">N/A</span><span class="stat-lbl">Released</span></div>
+</div>
+
+<div class="movie-cast-section">
+  <div class="movie-section-hdr">
+    <span class="movie-section-label">Cast</span>
+    
+  </div>
+  <div class="people-row" id="cast-row"></div>
+</div>
+
+<div class="movie-director-section">
+  <div class="movie-section-hdr">
+    <span class="movie-section-label">Directors</span>
+   
+  </div>
+  <div class="people-row" id="director-row"></div>
+</div>
+
+<footer>
+  <a href="index.html" class="footer-logo"><span class="p1">PICTO</span><span class="p2">PLEX</span></a>
+  <div class="footer-links">
+    <a href="#" class="footer-link">About</a>
+    <a href="browse.html" class="footer-link">Browse</a>
+    <a href="#" class="footer-link">Privacy</a>
+  </div>
+  <div class="footer-copy">&copy; 2024 PictoPlex</div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

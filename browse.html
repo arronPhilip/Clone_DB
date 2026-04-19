@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Browse Movies &mdash; PictoPlex</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><span class="p1">PICTO</span><span class="p2">PLEX</span></a>
+  <div class="nav-search">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <span>Search movies, actors, directors&hellip;</span>
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link active">Movies</a>
+    <a href="celebrities.html" class="nav-link">Celebrities</a>
+  </div>
+</nav>
+
+<div class="filter-bar">
+  <div class="filter-group">
+    <span class="filter-label">Year</span>
+    <input class="filter-input" id="yearFrom" type="number" placeholder="" min="" max="">
+    <span class="filter-sep">to</span>
+    <input class="filter-input" id="yearTo" type="number" placeholder="" min="" max="">
+  </div>
+  <div class="filter-group">
+    <span class="filter-label">Budget ($B)</span>
+    <input class="filter-input" id="budgetFrom" type="number" placeholder="" min="" step="0.1">
+    <span class="filter-sep">to</span>
+    <input class="filter-input" id="budgetTo" type="number" placeholder="" min="" step="0.1">
+  </div>
+  <div class="filter-group">
+    <span class="filter-label">Revenue ($B)</span>
+    <input class="filter-input" id="revenueFrom" type="number" placeholder="" min="" step="0.1">
+    <span class="filter-sep">to</span>
+    <input class="filter-input" id="revenueTo" type="number" placeholder="" min="" step="0.1">
+  </div>
+  <button class="filter-btn" id="applyFilters">Apply</button>
+  <button class="filter-clear" id="clearFilters">Clear all</button>
+</div>
+
+<div class="genre-bar" data-multi>
+  <span class="filter-label" style="margin-right:4px">Genre</span>
+</div>
+
+<div class="results-bar">
+  <div class="results-count">Showing <strong id="results-count">0</strong> films</div>
+  <select class="sort-select" id="sortSelect">
+    <option value="popularity">Most Popular</option>
+    <option value="year_desc">Newest First</option>
+    <option value="year_asc">Oldest First</option>
+    <option value="rating_desc">Highest Rated</option>
+    <option value="revenue_desc">Highest Revenue</option>
+  </select>
+</div>
+
+<div class="movie-list" id="movie-list"></div>
+
+<footer>
+  <a href="index.html" class="footer-logo"><span class="p1">PICTO</span><span class="p2">PLEX</span></a>
+  <div class="footer-links">
+    <a href="#" class="footer-link">About</a>
+    <a href="browse.html" class="footer-link">Browse</a>
+    <a href="#" class="footer-link">Privacy</a>
+  </div>
+  <div class="footer-copy">&copy; 2024 PictoPlex</div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
